@@ -1,8 +1,10 @@
 import { useRef, useState } from "react";
+import Copy from "./components/Copy";
 import './App.css';
 
 function App() {
         const [newl, setNewl] = useState()
+        const [butt, setbutt] = useState()
         const link = useRef()
         const newLink = useRef()
   function Add(){
@@ -15,10 +17,11 @@ function App() {
       body: data
     };
     fetch('http://localhost:3001/add', requestOptions)
-        .then(response => console.log(response))
+      .then(response => {console.log(response)})
 
 
-    setNewl("Your New Link is:  http://localhost:3000/"+newLink.current.value)
+    setNewl("Your New Link is:  http://localhost:3001/"+newLink.current.value)
+    setbutt(<Copy data={newLink.current.value} />)
   }
 
   return (
@@ -30,6 +33,7 @@ function App() {
       <br></br>
       <button onClick={Add}>Make Link</button>
       <div>{newl}</div>
+      <div>{butt}</div>
     </div>
   );
 }
