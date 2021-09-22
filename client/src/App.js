@@ -17,7 +17,13 @@ function App() {
       body: data
     };
     fetch('http://localhost:3001/add', requestOptions)
-      .then(response => {console.log(response)})
+    .then(res => res.json())
+    .then((json) => {
+      console.log(json)
+      if (json.success === false) {
+        setNewl('Alerdy Exist')
+      }
+    })
 
 
     setNewl("Your New Link is:  http://localhost:3001/"+newLink.current.value)
@@ -32,6 +38,7 @@ function App() {
       <input type="text" placeholder="New Link:" ref={newLink} ></input>
       <br></br>
       <button onClick={Add}>Make Link</button>
+      <br></br>
       <div>{newl}</div>
       <div>{butt}</div>
     </div>

@@ -4,10 +4,12 @@ var fs = require('fs');
 const { response } = require('express');
 var app = express();
 
+var cors = require('cors');
 var jsonParser = bodyParser.json();
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+app.use(cors({origin: 'http://localhost:3000'}))
 
 app.get('/', function(req, res){
     res.json({success:true})
@@ -43,6 +45,7 @@ app.post('/add', function(req, res){
     }
     else {
         console.log('Not Link')
+        res.json({success:false})
     }
     
 
